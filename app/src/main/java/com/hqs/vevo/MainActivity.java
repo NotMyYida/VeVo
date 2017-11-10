@@ -1,8 +1,13 @@
 package com.hqs.vevo;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,16 +17,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+
+import com.hqs.vevo.config.Config;
+import com.hqs.vevo.imageloader.PicassoImageLoader;
+import com.squareup.picasso.Picasso;
+import com.youth.banner.Banner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Banner banner;
+    private List<String> bannerImageUrls;
+
+    private String[] tabTitles = new String[]{ "探索", "个人养成", "日常生活", "家的管理", "家的升级" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        fullScreen(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);        //去掉显示标题
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +63,66 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // 广告轮播
+        banner = (Banner) findViewById(R.id.banner);
+        banner.setImageLoader(new PicassoImageLoader());
+        bannerImageUrls = new ArrayList<String>();
+        bannerImageUrls.add("https://wewow.wewow.com.cn/article/20171109/185610204098.png");
+        bannerImageUrls.add("https://wewow.wewow.com.cn/article/20171102/153519284814.png");
+        bannerImageUrls.add("https://wewow.wewow.com.cn/article/20171109/190304699993.png");
+        banner.setImages(bannerImageUrls);
+        banner.setDelayTime(Config.BANNER_DELAY_TIME );
+        banner.start();
+
+        // tabLayout
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        for( int i = 0 ; i < tabTitles.length ; i++ ){
+            tabLayout.addTab( tabLayout.newTab().setText(tabTitles[i]) );
+        }
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 在 onStart() 方法开始 自动播放
+        banner.startAutoPlay();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 在 onStop() 方法停止 自动播放
+        banner.stopAutoPlay();
+    }
+
+    private void fullScreen(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
+                Window window = activity.getWindow();
+                View decorView = window.getDecorView();
+                //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+                int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                decorView.setSystemUiVisibility(option);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+                //导航栏颜色也可以正常设置
+//                window.setNavigationBarColor(Color.TRANSPARENT);
+            } else {
+                Window window = activity.getWindow();
+                WindowManager.LayoutParams attributes = window.getAttributes();
+                int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+                attributes.flags |= flagTranslucentStatus;
+//                attributes.flags |= flagTranslucentNavigation;
+                window.setAttributes(attributes);
+            }
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -97,5 +179,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("tag","activity 被销毁");
     }
 }
