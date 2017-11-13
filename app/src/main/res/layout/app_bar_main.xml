@@ -41,17 +41,17 @@
 
 </android.support.design.widget.CollapsingToolbarLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll"
-            app:tabIndicatorColor="@color/tab_indicator_color"
-            app:tabTextColor="@color/tab_text_color_normal"
-            app:tabSelectedTextColor="@color/tab_text_color_selected"
-            app:tabIndicatorHeight="3dp"
-            app:tabGravity="fill"
-            />
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/tabLayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--app:layout_scrollFlags="scroll"-->
+            <!--app:tabIndicatorColor="@color/tab_indicator_color"-->
+            <!--app:tabTextColor="@color/tab_text_color_normal"-->
+            <!--app:tabSelectedTextColor="@color/tab_text_color_selected"-->
+            <!--app:tabIndicatorHeight="3dp"-->
+            <!--app:tabGravity="fill"-->
+            <!--/>-->
 
 
     </android.support.design.widget.AppBarLayout>

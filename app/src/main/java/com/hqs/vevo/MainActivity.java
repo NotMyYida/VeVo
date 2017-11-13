@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,7 +22,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.hqs.vevo.adapter.MyPagerAdapter;
 import com.hqs.vevo.config.Config;
+import com.hqs.vevo.fragment.VevoCategoryFragment;
 import com.hqs.vevo.imageloader.PicassoImageLoader;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private List<String> bannerImageUrls;
 
     private String[] tabTitles = new String[]{ "探索", "个人养成", "日常生活", "家的管理", "家的升级" };
+    private ViewPager mainViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,20 @@ public class MainActivity extends AppCompatActivity
         for( int i = 0 ; i < tabTitles.length ; i++ ){
             tabLayout.addTab( tabLayout.newTab().setText(tabTitles[i]) );
         }
+        mainViewPager = (ViewPager) findViewById(R.id.main_view_pager);
+        setUpViewPager();
 
+        tabLayout.setupWithViewPager(mainViewPager);
+    }
+
+    private void setUpViewPager() {
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(VevoCategoryFragment.newInstance("1"),tabTitles[0]);
+        adapter.addFragment(VevoCategoryFragment.newInstance("2"),tabTitles[1]);
+        adapter.addFragment(VevoCategoryFragment.newInstance("3"),tabTitles[2]);
+        adapter.addFragment(VevoCategoryFragment.newInstance("4"),tabTitles[3]);
+        adapter.addFragment(VevoCategoryFragment.newInstance("4"),tabTitles[4]);
+        mainViewPager.setAdapter(adapter);
     }
 
     @Override
