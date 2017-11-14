@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);        //去掉显示标题
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(VevoCategoryFragment.newInstance("2"),tabTitles[1]);
         adapter.addFragment(VevoCategoryFragment.newInstance("3"),tabTitles[2]);
         adapter.addFragment(VevoCategoryFragment.newInstance("4"),tabTitles[3]);
-        adapter.addFragment(VevoCategoryFragment.newInstance("4"),tabTitles[4]);
+        adapter.addFragment(VevoCategoryFragment.newInstance("5"),tabTitles[4]);
         mainViewPager.setAdapter(adapter);
     }
 
