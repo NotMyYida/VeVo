@@ -5,4 +5,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    
+    <string name="popular_life_expert">热门生活家</string>
+    <string name="latest_update">最近更新</string>
+    <string name="selected_research_institute">精选研究所</string>
+    <string name="life_research_institute">生活研究所</string>t
+    <string name="read">阅读</string>
+    <string name="collected">收藏</string>
+
 </resources>

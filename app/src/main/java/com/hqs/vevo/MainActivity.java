@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import com.hqs.vevo.adapter.MyPagerAdapter;
 import com.hqs.vevo.config.Config;
 import com.hqs.vevo.fragment.VevoCategoryFragment;
+import com.hqs.vevo.fragment.VevoExploreFragment;
 import com.hqs.vevo.imageloader.PicassoImageLoader;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setUpViewPager() {
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(VevoCategoryFragment.newInstance("1"),tabTitles[0]);
+        adapter.addFragment(VevoExploreFragment.newInstance(),tabTitles[0]);
         adapter.addFragment(VevoCategoryFragment.newInstance("2"),tabTitles[1]);
         adapter.addFragment(VevoCategoryFragment.newInstance("3"),tabTitles[2]);
         adapter.addFragment(VevoCategoryFragment.newInstance("4"),tabTitles[3]);
