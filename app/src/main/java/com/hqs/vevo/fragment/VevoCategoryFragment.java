@@ -29,10 +29,7 @@ public class VevoCategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vevo_category, null);
-        TextView tvTag = (TextView) view.findViewById(R.id.tv_tag);
-        String tag =getArguments().getString("tag");
-        Log.e("tag",tag);
-        tvTag.setText(tag);
+
         return view;
     }
 

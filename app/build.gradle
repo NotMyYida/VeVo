@@ -30,4 +30,6 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.10'
     // picasso 图片加载框架
     compile 'com.squareup.picasso:picasso:2.5.2'
+    // 圆形图片
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 }

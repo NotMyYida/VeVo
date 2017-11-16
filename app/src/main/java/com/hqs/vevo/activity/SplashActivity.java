@@ -2,6 +2,7 @@ package com.hqs.vevo.activity;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -40,7 +41,10 @@ public class SplashActivity extends AppCompatActivity {
         // 在 res 文件夹下，创建一个 transition 文件夹
         // 在文件夹里 创建动画文件
         // 在 style 里面 设置 <item name="android:windowExitTransition">@transition/fade</item>
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        if(Build.VERSION.SDK_INT >= 21 )
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        else
+            startActivity(intent);
         finish();
     }
 }
